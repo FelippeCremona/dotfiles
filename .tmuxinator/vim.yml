@@ -1,0 +1,12 @@
+# ~/.tmuxinator/vim.yml
+
+name: vim
+# root: ~/.config/lvim/
+
+# start session with this window open
+startup_window: editor
+startup_pane: "1"
+
+windows:
+  - editor: lvim ~/.config/lvim/ 
+  - bash: 

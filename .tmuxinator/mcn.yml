@@ -1,0 +1,19 @@
+# ~/.tmuxinator/mcn.yml
+
+name: mcn
+# root: ~/trabalho/spread/sistemas/simcn/des/mcn/ 
+
+# start session with this window open
+startup_window: bnd
+startup_pane: "1"
+
+windows:
+  - bnd: lvim ~/trabalho/spread/sistemas/simcn/des/mcn/
+  - fnd: lvim ~/trabalho/spread/sistemas/simcn/des/mcn/simcn-web/angular/
+  - server: 
+      layout: main-horizontal
+      panes:
+        - cd ~/trabalho/spread/sistemas/simcn/des/mcn/
+        - cd ~/trabalho/spread/sistemas/simcn/des/mcn/simcn-web/angular/ && clear
+  - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
+  - bash: 

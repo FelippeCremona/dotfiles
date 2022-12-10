@@ -1,0 +1,15 @@
+# ~/.tmuxinator/dotfiles.yml
+
+name: dotfiles
+# root: ~/
+
+# start session with this window open
+startup_window: vim
+
+windows:
+  - vim: lvim ~/.config/lvim/ 
+  - bash: lvim ~/.bashrc
+  - tmux: lvim ~/.tmux.conf
+  - starship: lvim ~/.config/starship.toml 
+  - tmuxinator: lvim ~/.tmuxinator/
+  - bash: 
