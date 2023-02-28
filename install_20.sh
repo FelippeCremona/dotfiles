@@ -13,7 +13,6 @@ sudo apt install fzf
 echo "************ OKCLI ***********"
 sudo pip install okcli
 
-
 echo "************ TMUXINATOR ***********"
 sudo apt-get install -y tmuxinator
 
@@ -23,7 +22,6 @@ curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | 
 echo "************ SDKMAN ***********"
 curl -s "https://get.sdkman.io" | bash
 . ~/.sdkman/bin/sdkman-init.sh
-
 
 echo "************ QUARKUS ***********"
 sdk install quarkus
@@ -43,6 +41,10 @@ sudo apt -y install nodejs
 echo "************ NPM ***********"
 sudo apt install npm
 
+echo "************ Altera Versão Node ************"
+sudo npm install -g n
+sudo n 14.20.1
+
 echo "************ CARGO ***********"
 sudo apt-get install cargo
 
@@ -52,18 +54,18 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get install neovim
 
 echo "************ LVIM ***********"
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-rm -rf ~/.config/lvim
-git clone https://github.com/FelippeCremona/lvim_config.git ~/.config/lvim
+#bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+#rm -rf ~/.config/lvim
+#git clone https://github.com/FelippeCremona/lvim_config.git ~/.config/lvim
 
 echo "************ LAZYGIT ***********"
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[0-9.]+')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
 rm lazygit.tar.gz
 
 echo "************ DIFF-SO-FANCY ***********"
 npm i diff-so-fancy
-
 
 echo "************ RUST ***********"
 curl https://sh.rustup.rs -sSf | sh
@@ -73,4 +75,3 @@ wget -c https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0
 unzip exa-linux-x86_64-0.8.0.zip
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
 rm ~/exa-linux-x86_64-0.8.0.zip
-
