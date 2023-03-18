@@ -1,0 +1,20 @@
+# ~/.tmuxinator/naf.yml
+
+name: naf
+# root: /home/cremona/trabalho/caixa/sistemas/sinaf/des/naf-web/
+
+# start session with this window open
+startup_window: bnd
+
+startup_pane: "1"
+
+windows:
+  - bnd: nvim ~/trabalho/caixa/sistemas/sinaf/des/naf-web/
+  - fnd: nvim ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/
+  - server: 
+      layout: main-horizontal
+      panes:
+        - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && clear
+        - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && clear
+  - git:  cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && lazygit 
+  - bash: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/
