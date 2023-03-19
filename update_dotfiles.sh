@@ -1,4 +1,4 @@
-test -d "/home/cremona/dotfiles" && echo "git clone https://github.com/FelippeCremona/dotfiles.git ~/dotfiles"
+test ! -d "/home/cremona/dotfiles" && echo "git clone https://github.com/FelippeCremona/dotfiles.git ~/dotfiles"
 cd ~/dotfiles
 cp ~/.bashrc .
 cp ~/.tmux.conf .
