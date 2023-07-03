@@ -38,7 +38,7 @@ echo "************ JAVA 19 ***********"
 sdk install java 19-open -y
 
 echo "************ STARSHIP ***********"
-curl -sS https://starship.rs/install.sh -y | sh
+curl -sS https://starship.rs/install.sh | sh
 
 echo "************ NODE 14 ***********"
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
@@ -52,12 +52,13 @@ sudo npm install -g n
 sudo n 14.20.1
 
 echo "************ CARGO ***********"
-sudo apt-get install cargo -y
+sudo apt-get install cargo
 
 # sudo apt-get install software-properties-common
 echo "************ NEOVIM 8 ***********"
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get install neovim -y
+git clone https://github.com/FelippeCremona/nvim-config.git ~/.config/nvim
 
 echo "************ LVIM ***********"
 #bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -81,3 +82,6 @@ wget -c https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0
 unzip exa-linux-x86_64-0.8.0.zip
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
 rm ~/dotfiles/exa-linux-x86_64-0.8.0.zip
+
+echo "************ ATUALIZA DOTFILES ***********"
+./restore_dotfiles.sh
