@@ -1,8 +1,11 @@
 echo "************ APT UPDATE ***********"
-sudo apt update | sudo apt upgrade -y
+sudo apt update
+
+echo "************ APT UPGRADE ***********"
+sudo apt upgrade -y
 
 echo "************ PYTHON3-PIP ***********"
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 
 echo "************ PYTHON2.7 ***********"
 sudo apt install python2-minimal
@@ -32,10 +35,10 @@ sdk install quarkus
 echo "************ JAVA 11.0.2 ***********"
 sdk install java 11.0.2-open
 echo "************ JAVA 19 ***********"
-sdk install java 19-open
+sdk install java 19-open -y
 
 echo "************ STARSHIP ***********"
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh -y | sh
 
 echo "************ NODE 14 ***********"
 curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
@@ -49,12 +52,12 @@ sudo npm install -g n
 sudo n 14.20.1
 
 echo "************ CARGO ***********"
-sudo apt-get install cargo
+sudo apt-get install cargo -y
 
 # sudo apt-get install software-properties-common
 echo "************ NEOVIM 8 ***********"
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get install neovim
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt-get install neovim -y
 
 echo "************ LVIM ***********"
 #bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -71,10 +74,10 @@ echo "************ DIFF-SO-FANCY ***********"
 npm i diff-so-fancy
 
 echo "************ RUST ***********"
-curl https://sh.rustup.rs -sSf | sh
+curl https://sh.rustup.rs -sSf -y | sh
 
 echo "************ EXA ***********"
 wget -c https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip
 unzip exa-linux-x86_64-0.8.0.zip
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
-rm ~/exa-linux-x86_64-0.8.0.zip
+rm ~/dotfiles/exa-linux-x86_64-0.8.0.zip
