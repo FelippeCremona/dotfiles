@@ -171,6 +171,9 @@ alias projetos="~/trabalho/programas/documentos/fzf_projetos.sh"
 
 alias quarkusd="quarkus dev -Dquarkus.console.enabled='false'"
 
+alias findd='find . -type d -name '
+alias findf='find . -type f -name '
+
 eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
