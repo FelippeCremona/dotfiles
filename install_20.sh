@@ -1,5 +1,5 @@
 echo "************ APT UPDATE ***********"
-sudo apt update
+sudo apt update | sudo apt upgrade -y
 
 echo "************ PYTHON3-PIP ***********"
 sudo apt install python3-pip
