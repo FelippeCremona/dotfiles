@@ -52,7 +52,7 @@ sudo npm install -g n
 sudo n 14.20.1
 
 echo "************ CARGO ***********"
-sudo apt-get install cargo
+sudo apt-get install cargo -y
 
 # sudo apt-get install software-properties-common
 echo "************ NEOVIM 8 ***********"
@@ -60,7 +60,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get install neovim -y
 git clone https://github.com/FelippeCremona/nvim-config.git ~/.config/nvim
 
-echo "************ LVIM ***********"
+# echo "************ LVIM ***********"
 #bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 #rm -rf ~/.config/lvim
 #git clone https://github.com/FelippeCremona/lvim_config.git ~/.config/lvim
