@@ -4,6 +4,9 @@ sudo apt update | sudo apt upgrade -y
 echo "************ PYTHON3-PIP ***********"
 sudo apt install python3-pip
 
+echo "************ PYTHON2.7 ***********"
+sudo apt install python2-minimal
+
 echo "************ RIPGREP ***********"
 sudo apt-get install ripgrep
 
