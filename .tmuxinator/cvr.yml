@@ -9,12 +9,12 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: nvim ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/
-  - fnd: nvim ~/trabalho/caixa/sistemas/sicvr/des/cvr-fnd/web/
+  - bnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/ && nvim
+  - fnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-fnd/web/ && nvim
   - server: 
       layout: main-horizontal
       panes:
         - cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/ && clear
         - cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-fnd/web/ && clear
-  - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
+  # - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
   - bash: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/

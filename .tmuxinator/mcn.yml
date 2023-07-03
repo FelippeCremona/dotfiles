@@ -8,12 +8,12 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: nvim ~/trabalho/caixa/sistemas/simcn/des/mcn/
-  - fnd: nvim ~/trabalho/caixa/sistemas/simcn/des/mcn/simcn-web/angular/
+  - bnd: cd ~/trabalho/caixa/sistemas/simcn/des/mcn/ && nvim
+  - fnd: cd ~/trabalho/caixa/sistemas/simcn/des/mcn/simcn-web/angular/ && nvim
   - server: 
       layout: main-horizontal
       panes:
         - cd ~/trabalho/caixa/sistemas/simcn/des/mcn/
         - cd ~/trabalho/caixa/sistemas/simcn/des/mcn/simcn-web/angular/ && clear
-  - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
+  # - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
   - bash: 
