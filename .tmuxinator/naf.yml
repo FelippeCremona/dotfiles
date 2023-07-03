@@ -9,8 +9,8 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && nvim
-  - fnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && nvim
+  - bnd: nvim ~/trabalho/caixa/sistemas/sinaf/des/naf-web/
+  - fnd: nvim ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/
   - server: 
       layout: main-horizontal
       panes:

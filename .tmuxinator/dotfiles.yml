@@ -7,9 +7,9 @@ name: dotfiles
 startup_window: vim
 
 windows:
-  - vim: cd ~/.config/nvim/ && nvim
+  - vim: nvim ~/.config/nvim/ 
   - bash: nvim ~/.bashrc
   - tmux: nvim ~/.tmux.conf
   - starship: nvim ~/.config/starship.toml 
-  - tmuxinator: cd ~/.tmuxinator/ && nvim
+  - tmuxinator: nvim ~/.tmuxinator/
   - bash: 
