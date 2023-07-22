@@ -30,6 +30,8 @@ sdk install quarkus
 
 echo "************ JAVA 11.0.2 ***********"
 sdk install java 11.0.2-open
+echo "************ JAVA 17 ***********"
+sdk install java 17-open
 echo "************ JAVA 19 ***********"
 sdk install java 19-open
 
