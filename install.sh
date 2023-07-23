@@ -8,10 +8,10 @@ echo "************ RIPGREP ***********"
 sudo apt-get install ripgrep
 
 echo "************ FZF ***********"
-sudo apt install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
-echo "************ OKCLI ***********"
-sudo pip install okcli
+# echo "************ OKCLI ***********"
+# sudo pip install okcli
 
 
 echo "************ TMUXINATOR ***********"
