@@ -67,6 +67,7 @@ alias findd="find . -type d -name $1"
 
 # Comandos WSL
 alias downloads="cd /mnt/c/Users/cremo/Downloads $1"
+alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
 
 # Comandos git
 alias gl="git log --oneline"
@@ -77,7 +78,16 @@ alias sc="~/trabalho/programas/documentos/fzf_arquivos.sh"
 alias docs="~/trabalho/programas/documentos/fzf_docs.sh"
 alias projetos="~/trabalho/programas/documentos/fzf_projetos.sh"
 
+# Comandos quarkus
 alias quarkusd="quarkus dev -Dquarkus.console.enabled='false'"
+
+# Comandos spring
+alias springd="mvn spring-boot:run"
+alias springinit="spring init -g=com -d=web,jpa,lombok,h2,devtools --build=maven -n=$1"
+
+# Comandos node
+alias caixa="sudo n v14.20.1"
+alias pessoal="sudo n v16.14.2"
 
 eval "$(starship init bash)"
 
@@ -110,14 +120,13 @@ glog (){
 # diff-so-fancy
 export PATH=$PATH:~/bin
 
-# conectar ao oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_8:$LD_LIBRARY_PATH
-
 # zoxide
 # export ZOXIDE_HOME=$HOME/.local/opt/zoxide                                
 # export PATH=$PATH:$ZOXIDE_HOME/bin                                        
 export PATH=/home/cremona/.local/bin:$PATH
 eval "$(zoxide init bash)"
+
+export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
@@ -126,3 +135,12 @@ eval "$(zoxide init bash)"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # . "$HOME/.cargo/env"
+
+# alias python=python3
+
+
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
+
+# Load Spring CLI autocompletion.
+. ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring
