@@ -86,8 +86,8 @@ alias springd="mvn spring-boot:run"
 alias springinit="spring init -g=com -d=web,jpa,lombok,h2,devtools --build=maven -n=$1"
 
 # Comandos node
-alias caixa="sudo n v14.20.1"
-alias pessoal="sudo n v16.14.2"
+alias caixa="sudo n v14.20.1 ;  cp ~/trabalho/programas/maven/settings_caixa.xml ~/.m2/settings.xml"
+alias pessoal="sudo n v16.14.2 ; cp ~/trabalho/programas/maven/settings_padrao.xml ~/.m2/settings.xml"
 
 eval "$(starship init bash)"
 
@@ -124,7 +124,7 @@ export PATH=$PATH:~/bin
 # export ZOXIDE_HOME=$HOME/.local/opt/zoxide                                
 # export PATH=$PATH:$ZOXIDE_HOME/bin                                        
 export PATH=/home/cremona/.local/bin:$PATH
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash --cmd cd)"
 
 export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
 
@@ -143,4 +143,4 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # source <(ng completion script)
 
 # Load Spring CLI autocompletion.
-. ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring
+# . ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring
