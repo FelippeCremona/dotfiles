@@ -65,59 +65,40 @@ alias celar="clear"
 alias findf="find . -type f -name $1"
 alias findd="find . -type d -name $1"
 
+alias ihost="cat /mnt/c/Windows/System32/drivers/etc/hosts | fzf | awk 'system(\"ping \" \$1)'"
+
 # Comandos WSL
 alias downloads="cd /mnt/c/Users/cremo/Downloads $1"
 
 # Comandos git
 alias gl="git log --oneline"
 alias glu="git log --date=iso --pretty='%C(Yellow)%h %C(reset)%cd %C(Cyan)%an: %C(reset)%s'"
+alias gadd="git ls-files --others --exclude-standard -m | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git add"
+alias gus="git diff --name-only --cached | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git restore --staged"
 
 # Comandos sistemas
 alias sc="~/trabalho/programas/documentos/fzf_arquivos.sh"
 alias docs="~/trabalho/programas/documentos/fzf_docs.sh"
 alias projetos="~/trabalho/programas/documentos/fzf_projetos.sh"
 
+# Comandos quarkus
 alias quarkusd="quarkus dev -Dquarkus.console.enabled='false'"
+
+# Comandos spring
+alias springd="mvn spring-boot:run"
+alias springinit="spring init -g=com -d=web,jpa,lombok,h2,devtools --build=maven -n=$1"
+
+# Comandos node
+alias caixa="sudo n v14.20.1 ;  cp ~/trabalho/programas/maven/settings_caixa.xml ~/.m2/settings.xml"
+alias pessoal="sudo n v16.14.2 ; cp ~/trabalho/programas/maven/settings_padrao.xml ~/.m2/settings.xml"
 
 eval "$(starship init bash)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-
-
-glog (){
-	git log \
-		--color=always \
-		--format="%C(cyan)%h %C(blue)%ar%C(auto)%d \
-			 %C(yellow)%s%+b %C(black)%ae" "$@" |
-	    fzf -i -e +s \
-		--tiebreak=index \
-        --reverse \
-		--no-multi \
-		--ansi \
-		--preview="echo {} |
-			   grep -o '[a-f0-9]\{7\}' |
-			   head -1 |
-			   xargs -I % sh -c 'git show --color=always % |
-			   diff-so-fancy'" \
-		--header "enter: view, C-c: copy hash" \
-		--bind "enter:execute:$_viewGitLogLine | less -R" \
-		--bind "ctrl-c:execute:$_gitLogLineToHash |
-			xclip -r -selection clipboard"
-}
-
-
-# diff-so-fancy
-export PATH=$PATH:~/bin
-
-# conectar ao oracle
-export LD_LIBRARY_PATH=/opt/oracle/instantclient_21_8:$LD_LIBRARY_PATH
-
 # zoxide
-# export ZOXIDE_HOME=$HOME/.local/opt/zoxide                                
-# export PATH=$PATH:$ZOXIDE_HOME/bin                                        
 export PATH=/home/cremona/.local/bin:$PATH
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash --cmd cd)"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
