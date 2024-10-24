@@ -9,9 +9,9 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/ && nvim
-  - fnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-fnd/web/ && nvim
-  - server: 
+  - bnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/ && vi .
+  - fnd: cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-fnd/web/ && vi .
+  - server:
       layout: main-horizontal
       panes:
         - cd ~/trabalho/caixa/sistemas/sicvr/des/cvr-bnd/ && clear

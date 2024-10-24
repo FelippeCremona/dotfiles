@@ -9,12 +9,11 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && nvim
-  - fnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && nvim
-  - server: 
+  - bnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && vi .
+  - fnd: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && vi .
+  - server:
       layout: main-horizontal
       panes:
         - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && clear
         - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && clear
-  - git:  cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && lazygit 
   - bash: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/

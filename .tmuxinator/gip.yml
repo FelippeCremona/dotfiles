@@ -9,13 +9,12 @@ startup_window: bnd
 startup_pane: "1"
 
 windows:
-  - bnd: cd ~/trabalho/caixa/sistemas/sigip/des/gip/ && nvim
-  - fnd: cd ~/trabalho/caixa/sistemas/sigip/des/gip/sigip-web/angular/ && nvim
-  - server: 
+  - bnd: cd ~/trabalho/caixa/sistemas/sigip/des/gip/ && vi .
+  - fnd: cd ~/trabalho/caixa/sistemas/sigip/des/gip/sigip-web/angular/ && vi .
+  - server:
       layout: main-horizontal
       panes:
         - cd ~/trabalho/caixa/sistemas/sigip/des/gip/ && clear
         - cd ~/trabalho/caixa/sistemas/sigip/des/gip/sigip-web/angular/ && clear
   # - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
   - bash: cd ~/trabalho/caixa/sistemas/sigip/des/gip/
-

@@ -69,6 +69,7 @@ alias ihost="cat /mnt/c/Windows/System32/drivers/etc/hosts | fzf | awk 'system(\
 
 # Comandos WSL
 alias downloads="cd /mnt/c/Users/cremo/Downloads $1"
+alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
 
 # Comandos git
 alias gl="git log --oneline"
@@ -100,6 +101,8 @@ eval "$(starship init bash)"
 export PATH=/home/cremona/.local/bin:$PATH
 eval "$(zoxide init bash --cmd cd)"
 
+export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
+
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
@@ -107,3 +110,12 @@ eval "$(zoxide init bash --cmd cd)"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # . "$HOME/.cargo/env"
+
+# alias python=python3
+
+
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
+
+# Load Spring CLI autocompletion.
+# . ~/.sdkman/candidates/springboot/current/shell-completion/bash/spring
