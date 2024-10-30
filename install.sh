@@ -98,5 +98,8 @@ unzip exa-linux-x86_64-0.8.0.zip
 sudo mv exa-linux-x86_64 /usr/local/bin/exa
 rm ~/exa-linux-x86_64-0.8.0.zip
 
+echo "************ TIG ***********"
+sudo apt install tig
+
 echo "************ ATUALIZA DOTFILES ***********"
 ./restore_dotfiles.sh
