@@ -54,6 +54,10 @@ HISTFILESIZE=2000
 #     . ~/.bash_aliases
 # fi
 
+# Configuracao UBUNTU
+alias sobe="~/dotfiles/sobe.sh"
+alias desce="~/dotfiles/desce.sh"
+
 # Tmuxinator
 alias tm="tmuxinator $1"
 
@@ -72,15 +76,18 @@ alias downloads="cd /mnt/c/Users/cremo/Downloads $1"
 alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
 
 # Comandos git
-alias gl="git log --oneline"
-alias glu="git log --date=iso --pretty='%C(Yellow)%h %C(reset)%cd %C(Cyan)%an: %C(reset)%s'"
+alias gl="tig"
+# alias glu="git log --date=iso --pretty='%C(Yellow)%h %C(reset)%cd %C(Cyan)%an: %C(reset)%s'"
 alias gadd="git ls-files --others --exclude-standard -m | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git add"
 alias gus="git diff --name-only --cached | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git restore --staged"
 
+# Comandos svn
+alias scommit="~/trabalho/programas/documentos/scripts/svn/svncommit.sh"
+alias srevert="~/trabalho/programas/documentos/scripts/svn/svnrevert.sh"
+
 # Comandos sistemas
-alias sc="~/trabalho/programas/documentos/fzf_arquivos.sh"
-alias docs="~/trabalho/programas/documentos/fzf_docs.sh"
-alias projetos="~/trabalho/programas/documentos/fzf_projetos.sh"
+alias sc="~/trabalho/programas/documentos/scripts/fzf_arquivos.sh"
+alias docs="~/trabalho/programas/documentos/scripts/fzf_docs.sh"
 
 # Comandos quarkus
 alias quarkusd="quarkus dev -Dquarkus.console.enabled='false'"

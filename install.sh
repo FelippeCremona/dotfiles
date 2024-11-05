@@ -102,4 +102,4 @@ echo "************ TIG ***********"
 sudo apt install tig
 
 echo "************ ATUALIZA DOTFILES ***********"
-./restore_dotfiles.sh
+./desce.sh
