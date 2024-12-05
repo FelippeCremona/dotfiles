@@ -12,21 +12,18 @@ sudo apt-get install -y python2.7-minimal
 ln -s /usr/bin/python2.7 /usr/bin/python 
 
 echo "************ RIPGREP ***********"
-RIPGREP_VERSION=$(curl -s "https://api.github.com/repos/BurntSushi/ripgrep/releases/latest" | grep -Po '"tag_name": "\K[0-9.]+')
-curl -Lo ripgrep.deb "https://github.com/BurntSushi/ripgrep/releases/latest/download/ripgrep_${RIPGREP_VERSION}_amd64.deb"
-sudo apt install -y ./ripgrep.deb
-rm -rf ripgrep.deb
+sudo apt-get -y install ripgrep
 
 echo "************ FZF ***********"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
-
-# echo "************ OKCLI ***********"
-# sudo pip install okcli
 
 echo "************ UPDATE GIT ***********"
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update
 sudo apt-get install git -y
+
+echo "************ UPDATE SVN ***********"
+sudo apt-get install subversion
 
 echo "************ TMUXINATOR ***********"
 sudo apt-get install -y tmuxinator
@@ -69,25 +66,16 @@ sudo npm install -g @angular/cli
 echo "************ CARGO ***********"
 sudo apt-get install cargo
 
-# sudo apt-get install software-properties-common
-echo "************ NEOVIM 8 ***********"
+echo "************ NEOVIM ***********"
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt-get install neovim -y
 git clone https://github.com/FelippeCremona/nvim-config.git ~/.config/nvim
 
-echo "************ LVIM ***********"
-# bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-# rm -rf ~/.config/lvim
-# git clone https://github.com/FelippeCremona/lvim_config.git ~/.config/lvim
-
-echo "************ LAZYGIT ***********"
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-sudo tar xf lazygit.tar.gz -C /usr/local/bin lazygit
-rm lazygit.tar.gz
-
-echo "************ DIFF-SO-FANCY ***********"
-npm i diff-so-fancy
-
+echo "************ HABILITA copiar e colar dentro NEOVIM ***********"
+curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+chmod +x /tmp/win32yank.exe
+sudo mv /tmp/win32yank.exe /usr/local/bin/
 
 echo "************ RUST ***********"
 curl https://sh.rustup.rs -sSf | sh
