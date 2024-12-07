@@ -8,7 +8,7 @@ end)
 
 local config = {}
 -- config.font = wezterm.font 'Hack NF'
-config.font = wezterm.font 'JetBrains Mono NL'
+-- config.font = wezterm.font 'JetBrains Mono NL'
 
 config.window_padding = {
   left = 0,
