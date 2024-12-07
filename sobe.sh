@@ -8,4 +8,6 @@ cp -r ~/trabalho/programas/documentos/ .
 cp /mnt/c/Arquivos\ de\ Programas/WezTerm/wezterm.lua .
 git add .
 git commit -m "atualizando"
-git push
+BILHETE1=ghp_5wBYqy5Gtz2n
+BILHETE2=Iwpnd4bKDCoBQpauC115jeft
+git push https://$BILHETE1$BILHETE2@github.com/FelippeCremona/dotfiles.git
