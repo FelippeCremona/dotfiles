@@ -6,7 +6,8 @@ cp -r .tmuxinator ~
 cp starship.toml ~/.config/
 cp wezterm.lua /mnt/c/Arquivos\ de\ Programas/WezTerm/
 
-pushd ~/.local/share/nvim/ && git pull
+cd ~/.local/share/nvim/ && git pull
+cd ~/dotfiles/
 
 # Copia scripts e aplica permissionamento de execucao
 mkdir -p ~/trabalho/programas/ 
