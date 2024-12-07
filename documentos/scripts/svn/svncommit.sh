@@ -40,7 +40,7 @@ for filepath in $files; do
 done
 
 # Perguntar se deseja adicionar ou remover os arquivos selecionados
-read -p "Deseja adicionar ou remover os arquivos selecionados? (s/n): " confirm
+read -p "Deseja atualizar os arquivos selecionados? (s/n): " confirm
 if [[ "$confirm" != "s" ]]; then
     echo "Operação cancelada."
     exit 1
