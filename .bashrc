@@ -84,7 +84,7 @@ alias gus="git diff --name-only --cached | fzf --multi --preview 'git diff' | aw
 # Comandos svn
 alias scommit="~/trabalho/programas/documentos/scripts/svn/svncommit.sh"
 alias srevert="~/trabalho/programas/documentos/scripts/svn/svnrevert.sh"
-alias svnlog="svn log | awk '/^r[0-9]+/ {rev=\$1; user=\$3; getline; comentario=getline; print rev \" | \" user \" | \" \$0, comentario}'"
+alias slog="svn log | awk '/^r[0-9]+/ {rev=\$1; user=\$3; getline; comentario=getline; print rev \" | \" user \" | \" \$0, comentario}'"
 
 
 # Comandos sistemas
