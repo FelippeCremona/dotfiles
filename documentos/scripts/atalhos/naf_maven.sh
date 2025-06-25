@@ -11,6 +11,10 @@ PATH="$HOME/trabalho/programas/maven/apache-maven-3.8.6/bin:$PATH"
 JAVA_HOME="$HOME/trabalho/programas/java/jdk1.8.0_351"
 PATH="$JAVA_HOME/bin:$PATH"
 
+rm -R $BASE_SISTEMA/assinador/target
+rm -R $BASE_SISTEMA/batch/target
+rm -R $BASE_SISTEMA/ejb/target
+rm -R $BASE_SISTEMA/web/target
 rm -R $CAMINHO_TARGET
 
 rm -R $BASE_SERVIDOR/standalone/deployments

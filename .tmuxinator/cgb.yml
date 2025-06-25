@@ -1,0 +1,20 @@
+# ~/.tmuxinator/cgb.yml
+
+name: cgb
+# root: /home/cremona/trabalho/caixa/sistemas/sicgb/des/cgb-bnd/
+
+# start session with this window open
+startup_window: bnd
+
+startup_pane: "1"
+
+windows:
+  - bnd: cd ~/trabalho/caixa/sistemas/sicgb/des/cgb-bnd/ && vi .
+  - fnd: cd ~/trabalho/caixa/sistemas/sicgb/des/cgb-fnd/web/ && vi .
+  - server:
+      layout: main-horizontal
+      panes:
+        - cd ~/trabalho/caixa/sistemas/sicgb/des/cgb-bnd/ && clear
+        - cd ~/trabalho/caixa/sistemas/sicgb/des/cgb-fnd/web/ && clear
+  # - banco: okcli -u f759705 -h cnpexdadvm01-scan4.extra.caixa.gov.br:1521/orad01ng -p Senha705 --auto-vertical-output
+  - bash: cd ~/trabalho/caixa/sistemas/sicgb/des/cgb-bnd/

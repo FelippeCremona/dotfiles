@@ -1,6 +1,9 @@
 cd ~/dotfiles/
 git pull
 cp .bashrc ~
+cp .zshrc ~
+cp .zprofile ~
+cp -r shell ~/.config/
 cp .tmux.conf ~
 cp -r .tmuxinator ~
 cp starship.toml ~/.config/

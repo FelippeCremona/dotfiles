@@ -9,9 +9,9 @@ JAVA_HOME="$HOME/trabalho/programas/java/jdk-11.0.17"
 PATH="$JAVA_HOME/bin:$PATH"
 
 # Variaveis do MAVEN
-PATH="$HOME/trabalho/programas/maven/apache-maven-3.8.6/bin:$PATH"
+PATH="$HOME/trabalho/programas/maven/apache-maven-3.8.8/bin:$PATH"
 SETTINGS_MAVEN="$HOME/trabalho/programas/maven/settings.xml"
-M2_HOME="$HOME/trabalho/programas/maven/apache-maven-3.8.6"
+M2_HOME="$HOME/trabalho/programas/maven/apache-maven-3.8.8"
 PATH="$M2_HOME/bin:$PATH"
 
 # Variaveis do SISTEMA
@@ -35,4 +35,6 @@ export API_KEY_SIICO=l7e62cd9835b404e619129dcf7ad97d30d
 # export API_SICLI_URL=http://apicadastro.des.caixa/cadastro/ws
 export API_SICLI_URL=https://api.des.caixa:8443/cadastro
 
+pushd $BASE_SISTEMA && mvn --version
+pushd $BASE_SISTEMA && java --version
 pushd $BASE_SISTEMA && mvn quarkus:dev --settings $SETTINGS_MAVEN

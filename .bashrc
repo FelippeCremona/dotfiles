@@ -55,52 +55,7 @@ HISTFILESIZE=2000
 # fi
 
 # Configuracao UBUNTU
-alias sobe="~/dotfiles/sobe.sh"
-alias desce="~/dotfiles/desce.sh"
-
-# Tmuxinator
-alias tm="tmuxinator $1"
-
-# Comandos linux
-alias ls="exa -lah --color=auto"
-alias vi="nvim"
-alias celar="clear"
-
-alias findf="find . -type f -name $1"
-alias findd="find . -type d -name $1"
-
-alias ihost="cat /mnt/c/Windows/System32/drivers/etc/hosts | fzf | awk 'system(\"ping \" \$1)'"
-
-# Comandos WSL
-alias downloads="cd /mnt/c/Users/cremo/Downloads $1"
-alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
-
-# Comandos git
-alias gl="tig"
-# alias glu="git log --date=iso --pretty='%C(Yellow)%h %C(reset)%cd %C(Cyan)%an: %C(reset)%s'"
-alias gadd="git ls-files --others --exclude-standard -m | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git add"
-alias gus="git diff --name-only --cached | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git restore --staged"
-
-# Comandos svn
-alias scommit="~/trabalho/programas/documentos/scripts/svn/svncommit.sh"
-alias srevert="~/trabalho/programas/documentos/scripts/svn/svnrevert.sh"
-alias slog="svn log | awk '/^r[0-9]+/ {rev=\$1; user=\$3; getline; comentario=getline; print rev \" | \" user \" | \" \$0, comentario}'"
-
-
-# Comandos sistemas
-alias sc="~/trabalho/programas/documentos/scripts/fzf_arquivos.sh"
-alias docs="~/trabalho/programas/documentos/scripts/fzf_docs.sh"
-
-# Comandos quarkus
-alias quarkusd="quarkus dev -Dquarkus.console.enabled='false'"
-
-# Comandos spring
-alias springd="mvn spring-boot:run"
-alias springinit="spring init -g=com -d=web,jpa,lombok,h2,devtools --build=maven -n=$1"
-
-# Comandos node
-alias caixa="sudo n v14.20.1 ;  cp ~/trabalho/programas/maven/settings_caixa.xml ~/.m2/settings.xml"
-alias pessoal="sudo n v16.14.2 ; cp ~/trabalho/programas/maven/settings_padrao.xml ~/.m2/settings.xml"
+source ~/alias
 
 eval "$(starship init bash)"
 

@@ -4,6 +4,9 @@ BILHETE2=Iwpnd4bKDCoBQpauC115jeft
 test ! -d "/home/cremona/dotfiles" && git clone https://github.com/FelippeCremona/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 cp ~/.bashrc .
+cp ~/.zshrc .
+cp ~/.zprofile .
+cp -r ~/.config/shell/ .
 cp ~/.tmux.conf .
 cp -r ~/.tmuxinator .
 cp ~/.config/starship.toml .

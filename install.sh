@@ -4,6 +4,16 @@ sudo apt update
 echo "************ APT UPGRADE ***********"
 sudo apt upgrade -y
 
+echo "************ ZSH ***********"
+sudo apt install zsh
+chsh -s $(which zsh)
+mkdir -p ~/.zsh
+
+echo "************ PLUGINS ZSH ***********"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
+
 echo "************ PYTHON3-PIP ***********"
 sudo apt install python3-pip -y
 
@@ -46,6 +56,9 @@ sdk install java 17-open
 echo "************ JAVA 19 ***********"
 sdk install java 19-open
 
+echo "************ Define java 17 como padrao ***********"
+sdk default java 17-open 
+
 echo "************ STARSHIP ***********"
 curl -sS https://starship.rs/install.sh | sh
 
@@ -62,6 +75,16 @@ sudo n 14.20.1
 
 echo "************ CLI Angular ************"
 sudo npm install -g @angular/cli
+
+echo "************ Install typescript language server ************"
+sudo npm install -g typescript typescript-language-server 
+
+echo "************ Install typescript language server ************"
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+sudo apt update
+sudo apt install docker-ce
 
 echo "************ CARGO ***********"
 sudo apt-get install cargo
@@ -80,11 +103,13 @@ sudo mv /tmp/win32yank.exe /usr/local/bin/
 echo "************ RUST ***********"
 curl https://sh.rustup.rs -sSf | sh
 
-echo "************ EXA ***********"
-wget -c https://github.com/ogham/exa/releases/download/v0.8.0/exa-linux-x86_64-0.8.0.zip
-unzip exa-linux-x86_64-0.8.0.zip
-sudo mv exa-linux-x86_64 /usr/local/bin/exa
-rm ~/exa-linux-x86_64-0.8.0.zip
+echo "************ EZA ***********"
+sudo apt install -y gpg wget
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+
+sudo apt install -y eza
 
 echo "************ TIG ***********"
 sudo apt install tig
