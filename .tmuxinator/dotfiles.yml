@@ -8,9 +8,9 @@ startup_window: vim
 
 windows:
   - vim: cd ~/.config/nvim/ && nvim
-  - bash: nvim ~/.zshrc
+  - zsh: nvim ~/.zshrc
   - tmux: nvim ~/.tmux.conf
   - starship: nvim ~/.config/starship.toml 
   - tmuxinator: cd ~/.tmuxinator/ && nvim
   - wezterm: nvim /mnt/c/Arquivos\ de\ Programas/WezTerm/wezterm.lua
-  - bash: 
+  - zsh: 
