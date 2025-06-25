@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 cd ~/dotfiles/
 git pull
 cp .bashrc ~

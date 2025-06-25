@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 BILHETE1=ghp_5wBYqy5Gtz2n
 BILHETE2=Iwpnd4bKDCoBQpauC115jeft
 
