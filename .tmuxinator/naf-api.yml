@@ -13,4 +13,4 @@ windows:
   - subconta: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-api-subconta/ && nvim
   - subconta-produto: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-api-subcontaproduto/ && nvim
   - roteiro: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-api-roteiro/ && nvim
-  - bash: cd ~
+  - zsh: cd ~

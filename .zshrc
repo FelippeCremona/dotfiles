@@ -8,8 +8,9 @@ source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # binds
-# bindkey -e #Use emacs keybindings even if our EDITOR is set to vi
-# bindkey -v #Use vi keybindings even if our EDITOR is set to vi
+bindkey -v #Use vi keybindings even if our EDITOR is set to vi
+bindkey '^f' autosuggest-accept
+
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
 bindkey "^k" kill-line
@@ -20,9 +21,6 @@ bindkey "^H" backward-kill-word
 bindkey "^J" history-search-forward
 bindkey "^K" history-search-backward
 bindkey '^R' fzf-history-widget
-
-# autoload edit-command-line; zle -N edit-command-line
-# bindkey '^e' edit-command-line
 
 # Keep 1000000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000000

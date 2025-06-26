@@ -16,4 +16,4 @@ windows:
       panes:
         - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/ && clear
         - cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/web/ && clear
-  - bash: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/
+  - zsh: cd ~/trabalho/caixa/sistemas/sinaf/des/naf-web/
