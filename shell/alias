@@ -1,6 +1,6 @@
 # Configuracao UBUNTU
-alias sobe="~/dotfiles/sobe.sh"
-alias desce="~/dotfiles/desce.sh"
+alias sobe="~/.config/shell/sobe.sh"
+alias desce="~/.config/shell/desce.sh"
 
 # Tmuxinator
 alias tm="tmuxinator $1"
