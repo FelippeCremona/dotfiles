@@ -33,6 +33,7 @@ alias firefox="'/mnt/c/Program Files/Mozilla Firefox/firefox.exe'"
 alias gl="tig"
 # alias glu="git log --date=iso --pretty='%C(Yellow)%h %C(reset)%cd %C(Cyan)%an: %C(reset)%s'"
 alias gadd="git ls-files --others --exclude-standard -m | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git add"
+alias gd="git ls-files --others --exclude-standard -m | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git diff"
 alias gus="git diff --name-only --cached | fzf --multi --preview 'git diff' | awk '{print \$1}' | xargs git restore --staged"
 alias gc="~/trabalho/programas/documentos/scripts/fzf_branchs.sh"
 

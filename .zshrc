@@ -57,4 +57,6 @@ export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+source $HOME/.cargo/env
+
 eval "$(starship init zsh)"
