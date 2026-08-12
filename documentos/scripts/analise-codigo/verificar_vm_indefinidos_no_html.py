@@ -131,7 +131,12 @@ def effective_members(name, info, cache, seen=None):
 # --------------------------------------------------------------------------
 
 def strip_html_comments(content):
-    return HTML_COMMENT_RE.sub('', content)
+    """Remove comentarios HTML preservando a contagem de linhas (troca o
+    comentario por quebras de linha, em vez de apagar o texto) -- senao
+    qualquer linha DEPOIS de um comentario multi-linha fica com o numero
+    errado (deslocado pra tras pelas quebras de linha que sumiram junto
+    com o texto apagado)."""
+    return HTML_COMMENT_RE.sub(lambda m: '\n' * m.group(0).count('\n'), content)
 
 
 def looks_like_call(content, end_pos):
