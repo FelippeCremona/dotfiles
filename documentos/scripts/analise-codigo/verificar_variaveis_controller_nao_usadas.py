@@ -148,10 +148,9 @@ def collect_controller_vars(js_files):
         if not variables:
             continue
 
-        parent_match = PARENT_CONTROLLER_RE.search(content)
         controllers[path] = {
             'name': name,
-            'parent': parent_match.group(1) if parent_match else None,
+            'parent': tuple(dict.fromkeys(PARENT_CONTROLLER_RE.findall(content))),
             'variables': variables,
         }
     return controllers
@@ -290,7 +289,7 @@ def print_report(result):
             if ctrl_name in children_map:
                 note = f"  [controller base, herdado por: {', '.join(sorted(children_map[ctrl_name]))}]"
             elif items[0]['parent']:
-                note = f"  [estende {items[0]['parent']}]"
+                note = f"  [estende {', '.join(items[0]['parent'])}]"
             print(f"- {f}  (controller '{ctrl_name}'){note}")
             for u in items:
                 print(f"    linha {u['line']:>5}  vm.{u['var']} = {u['expr']}")

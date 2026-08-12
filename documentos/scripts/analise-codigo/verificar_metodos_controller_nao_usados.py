@@ -66,7 +66,11 @@ VM_EXPOSE_FUNC_RE = re.compile(r'\bvm\.(\w+)\s*=\s*function\b')
 
 def collect_controllers(js_files):
     """js_files: lista de (path, content_sem_comentarios).
-    Retorna dict path -> {'name', 'parent', 'methods': {chave: {...}}}."""
+    Retorna dict path -> {'name', 'parent', 'methods': {chave: {...}}}.
+    'parent' e uma tupla (pode ter mais de um nome: um mesmo controller pode
+    dar 'angular.extend(this, $controller(...))' mais de uma vez, misturando
+    metodos de varios controllers-base -- herdar de um so seria perder os
+    metodos do(s) outro(s))."""
     controllers = {}
     for path, content in js_files:
         reg = CONTROLLER_REGISTER_RE.search(content)
@@ -93,10 +97,9 @@ def collect_controllers(js_files):
         if not methods:
             continue
 
-        parent_match = PARENT_CONTROLLER_RE.search(content)
         controllers[path] = {
             'name': name,
-            'parent': parent_match.group(1) if parent_match else None,
+            'parent': tuple(dict.fromkeys(PARENT_CONTROLLER_RE.findall(content))),
             'methods': methods,
         }
     return controllers
@@ -128,8 +131,8 @@ def find_keys_matching_anywhere(contents, keys, template):
 def build_children_map(controllers):
     children = {}
     for info in controllers.values():
-        if info['parent']:
-            children.setdefault(info['parent'], []).append(info['name'])
+        for parent in info['parent']:
+            children.setdefault(parent, []).append(info['name'])
     return children
 
 
@@ -297,7 +300,7 @@ def print_report(result):
             if ctrl_name in children_map:
                 note = f"  [controller base, herdado por: {', '.join(sorted(children_map[ctrl_name]))}]"
             elif items[0]['parent']:
-                note = f"  [estende {items[0]['parent']}]"
+                note = f"  [estende {', '.join(items[0]['parent'])}]"
             print(f"- {f}  (controller '{ctrl_name}'){note}")
             for u in items:
                 tag = ' ' + warn('[inline]') if u['inline'] else ''

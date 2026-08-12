@@ -59,6 +59,7 @@ from verificar_apis import (
 )
 from verificar_metodos_controller_nao_usados import (
     CONTROLLER_REGISTER_RE,
+    PARENT_CONTROLLER_RE,
     collect_controllers,
 )
 from verificar_variaveis_controller_nao_usadas import collect_controller_vars
@@ -74,30 +75,38 @@ NAME_ATTR_RE = re.compile(r'\bname\s*=\s*[\'"]vm\.(\w+)')
 
 def build_controller_members(all_js):
     """Retorna dict nome_controller -> {'members': set(...), 'parent':
-    str|None}, juntando o que verificar_metodos_controller_nao_usados.py e
-    verificar_variaveis_controller_nao_usadas.py conseguem enxergar."""
+    set(...)}, juntando o que verificar_metodos_controller_nao_usados.py e
+    verificar_variaveis_controller_nao_usadas.py conseguem enxergar.
+    'parent' pode ter mais de um nome -- um controller pode dar
+    'angular.extend(this, $controller(...))' mais de uma vez no mesmo
+    arquivo, misturando membros de mais de um controller-base."""
     method_ctrls = collect_controllers(all_js)
     var_ctrls = collect_controller_vars(all_js)
 
     info = {}
     for data in method_ctrls.values():
-        entry = info.setdefault(data['name'], {'members': set(), 'parent': None})
+        entry = info.setdefault(data['name'], {'members': set(), 'parent': set()})
         entry['members'].update(data['methods'].keys())
-        if data['parent']:
-            entry['parent'] = data['parent']
+        entry['parent'].update(data['parent'])
     for data in var_ctrls.values():
-        entry = info.setdefault(data['name'], {'members': set(), 'parent': None})
+        entry = info.setdefault(data['name'], {'members': set(), 'parent': set()})
         entry['members'].update(data['variables'].keys())
-        if data['parent']:
-            entry['parent'] = data['parent']
+        entry['parent'].update(data['parent'])
 
     # Nomes de TODOS os controllers registrados (mesmo sem metodo/variavel
     # capturado pelos coletores acima), para diferenciar "controller nao
-    # encontrado" de "controller encontrado mas sem esse membro".
+    # encontrado" de "controller encontrado mas sem esse membro". Tambem
+    # extrai o(s) parent(es) aqui de novo (nao so via method_ctrls/
+    # var_ctrls): um controller que e SO um wrapper de angular.extend, sem
+    # nenhum vm.x proprio, nao aparece em collect_controllers nem em
+    # collect_controller_vars (ambos ignoram arquivo sem nenhum membro
+    # proprio) -- sem isso o parent dele se perderia e o wrapper ficaria
+    # sem NENHUM membro conhecido, mesmo herdando de um controller valido.
     for _path, content in all_js:
         reg = CONTROLLER_REGISTER_RE.search(content)
         if reg:
-            info.setdefault(reg.group(1), {'members': set(), 'parent': None})
+            entry = info.setdefault(reg.group(1), {'members': set(), 'parent': set()})
+            entry['parent'].update(PARENT_CONTROLLER_RE.findall(content))
 
     return info
 
@@ -111,8 +120,8 @@ def effective_members(name, info, cache, seen=None):
         return set()
     entry = info[name]
     members = set(entry['members'])
-    if entry['parent']:
-        members |= effective_members(entry['parent'], info, cache, seen | {name})
+    for parent in entry['parent']:
+        members |= effective_members(parent, info, cache, seen | {name})
     cache[name] = members
     return members
 

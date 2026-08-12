@@ -129,7 +129,7 @@ def print_group_header(f, items, children_map):
         else:
             parent = next((it.get('parent') for it in items if it.get('parent')), None)
             if parent:
-                note = f"  [estende {parent}]"
+                note = f"  [estende {', '.join(parent)}]"
     label = 'service' if header_kind == 'service' else 'controller'
     print(f"- {f}  ({label} '{header_name}'){note}")
 
