@@ -16,7 +16,10 @@
       "Bash(tmux capture-pane *)",
       "Bash(tmux list-keys *)",
       "Bash(tmux unbind-key *)",
-      "Bash(tmux list-sessions *)"
+      "Bash(tmux list-sessions *)",
+      "Bash(find /home/cremona/trabalho/caixa/sistemas/simcn/des/mcn/simcn-web/angular -name *.js -not -path */node_modules/*)",
+      "Bash(xargs grep -l '$stateProvider')",
+      "Bash(find /home/cremona/trabalho/caixa/sistemas/sinaf/des/naf-web/web/target/sinaf3-web -name *.js)"
     ]
   }
 }

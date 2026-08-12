@@ -376,14 +376,21 @@ def resolve_template_path(expr, var_defs, pos):
 
 
 def map_html_to_controllers(all_js, frontend_dir, html_paths):
-    """Retorna (view_controllers, unresolved): view_controllers e um dict
-    path_html -> set(nome_controller) montado lendo templateUrl/controller
-    em TODO .js (rotas + modais); unresolved e a contagem de templateUrl
-    encontrados cuja expressao nao resolveu para um caminho 100% literal
-    (ex.: concatenacao com algo alem de 'var' local)."""
+    """Retorna (view_controllers, unresolved, not_found): view_controllers e
+    um dict path_html -> set(nome_controller) montado lendo templateUrl/
+    controller em TODO .js (rotas + modais); unresolved e a contagem de
+    templateUrl encontrados cuja expressao nao resolveu para um caminho
+    100% literal (ex.: concatenacao com algo alem de 'var' local); not_found
+    e a lista de (templateUrl_literal, caminho_absoluto_esperado) para
+    templateUrl que resolveram para um caminho literal, mas que nao bateu
+    com nenhum .html encontrado em 'frontend_dir' -- sinal forte de que
+    'frontend_dir' e a pasta errada (ex.: um nivel acima da raiz real do
+    frontend), ja que nesse caso QUASE TODO templateUrl falha da mesma
+    forma, ao contrario de 'unresolved' que e por expressao dinamica."""
     html_by_norm_path = {os.path.normpath(p): p for p in html_paths}
     view_controllers = {}
     unresolved = 0
+    not_found = []
     for path, content in all_js:
         if 'templateUrl' not in content:
             continue
@@ -402,9 +409,29 @@ def map_html_to_controllers(all_js, frontend_dir, html_paths):
             norm = os.path.normpath(os.path.join(frontend_dir, literal.strip('/')))
             html_path = html_by_norm_path.get(norm)
             if not html_path:
+                not_found.append((literal, norm))
                 continue
             view_controllers.setdefault(html_path, set()).add(controller)
-    return view_controllers, unresolved
+    return view_controllers, unresolved, not_found
+
+
+def format_view_mapping_log(view_controllers, unresolved, not_found):
+    """Mensagem padrao (usada pelos scripts que chamam map_html_to_controllers)
+    reportando quantas views foram mapeadas, quantos templateUrl ficaram sem
+    resolver (expressao dinamica) e, se houver, quantos resolveram para um
+    caminho literal mas nao bateram com nenhum .html -- nesse ultimo caso,
+    se a proporcao for alta, avisa que a pasta selecionada provavelmente
+    nao e a raiz correta do frontend (sintoma classico: quase todo
+    templateUrl falha do mesmo jeito, ao inves de so alguns)."""
+    msg = (f"  {len(view_controllers)} view(s) HTML mapeada(s) para controller; "
+           f"{unresolved} templateUrl(s) com expressao nao totalmente resolvida (ignorados).")
+    if not_found:
+        msg += (f"\n  Aviso: {len(not_found)} templateUrl(s) resolveram para um caminho "
+                f"literal mas NENHUM .html correspondente foi encontrado na pasta "
+                f"selecionada -- confira se ela e mesmo a raiz do frontend (ex.: "
+                f".../web/src/main/angular, e nao um nivel acima). Exemplo: "
+                f"'{not_found[0][0]}' -> procurado em '{not_found[0][1]}'.")
+    return msg
 
 
 def parse_param_names(raw):

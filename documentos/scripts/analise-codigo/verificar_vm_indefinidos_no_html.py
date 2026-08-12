@@ -51,6 +51,7 @@ import sys
 from verificar_apis import (
     ask_dir,
     find_files,
+    format_view_mapping_log,
     map_html_to_controllers,
     pick_and_open_in_editor,
     setup_path_completion,
@@ -195,9 +196,8 @@ def analyze(frontend_dir, log=print):
     log(f"  {len(all_js)} arquivo(s) .js e {len(html_paths)} arquivo(s) .html encontrados.")
 
     log("\nMapeando views (templateUrl) para controllers (rotas + modais)...")
-    view_controllers, unresolved = map_html_to_controllers(all_js, frontend_dir, html_paths)
-    log(f"  {len(view_controllers)} view(s) HTML mapeada(s) para controller; "
-        f"{unresolved} templateUrl(s) com expressao nao totalmente resolvida (ignorados).")
+    view_controllers, unresolved, not_found = map_html_to_controllers(all_js, frontend_dir, html_paths)
+    log(format_view_mapping_log(view_controllers, unresolved, not_found))
 
     log("\nColetando metodos/variaveis expostos por cada controller...")
     controller_info = build_controller_members(all_js)
@@ -223,7 +223,7 @@ def analyze(frontend_dir, log=print):
 def format_finding(f):
     tag = '()' if f['is_call'] else ''
     ctrls = ', '.join(f['controllers'])
-    return f"vm.{f['ident']}{tag}  [{ctrls}]"
+    return f"[{ctrls}]  vm.{f['ident']}{tag}"
 
 
 def print_report(result):

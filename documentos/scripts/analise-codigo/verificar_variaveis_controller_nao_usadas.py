@@ -50,6 +50,7 @@ from verificar_apis import (
     ask_dir,
     find_files,
     find_repo_root,
+    format_view_mapping_log,
     map_html_to_controllers,
     pick_and_open_in_editor,
     setup_path_completion,
@@ -254,9 +255,8 @@ def analyze(frontend_dir, log=print):
     children_map = build_children_map(controllers)
 
     log("\nMapeando views (templateUrl) para controllers (rotas + modais)...")
-    view_controllers, unresolved = map_html_to_controllers(all_js, frontend_dir, html_paths)
-    log(f"  {len(view_controllers)} view(s) HTML mapeada(s) para controller; "
-        f"{unresolved} templateUrl(s) com expressao nao totalmente resolvida (ignorados).")
+    view_controllers, unresolved, not_found = map_html_to_controllers(all_js, frontend_dir, html_paths)
+    log(format_view_mapping_log(view_controllers, unresolved, not_found))
 
     log("\nProcurando usos (escopado por controller, com rede de seguranca global)...")
     unused = find_unused_controller_vars(controllers, all_js, all_html, view_controllers, children_map)
