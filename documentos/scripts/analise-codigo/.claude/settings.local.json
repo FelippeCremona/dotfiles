@@ -19,7 +19,12 @@
       "Bash(tmux list-sessions *)",
       "Bash(find /home/cremona/trabalho/caixa/sistemas/simcn/des/mcn/simcn-web/angular -name *.js -not -path */node_modules/*)",
       "Bash(xargs grep -l '$stateProvider')",
-      "Bash(find /home/cremona/trabalho/caixa/sistemas/sinaf/des/naf-web/web/target/sinaf3-web -name *.js)"
+      "Bash(find /home/cremona/trabalho/caixa/sistemas/sinaf/des/naf-web/web/target/sinaf3-web -name *.js)",
+      "Bash(grep -n 'angular.extend\\\\|\\\\$controller\\(\\\\|extend' verificar_metodos_angular_nao_usados.py verificar_funcoes_locais_nao_usadas.py verificar_metodos_nao_usados.py)",
+      "Bash(luac -p /home/cremona/.config/nvim/lua/cremona/angularjs_goto.lua)",
+      "Bash(lua -e \"loadfile\\('/home/cremona/.config/nvim/lua/cremona/angularjs_goto.lua'\\)\")",
+      "Bash(nvim --version)",
+      "Bash(nvim *)"
     ]
   }
 }
