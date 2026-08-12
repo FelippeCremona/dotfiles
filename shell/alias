@@ -14,9 +14,9 @@ alias celar="clear"
 alias findf="find . -type f -name $1"
 alias findd="find . -type d -name $1"
 
-alias ib="cd /home/cremona/trabalho/caixa/doc/demandas/ && vi atual.md"
+alias ib="cd $HOME/trabalho/caixa/doc/demandas/ && vi atual.md"
 # function fib() {
-#     nvim $(grep -rin "$1" /home/cremona/trabalho/caixa/doc/demandas/ | fzf | cut -d: -f1,2 | sed 's/:/ +/')
+#     nvim $(grep -rin "$1" $HOME/trabalho/caixa/doc/demandas/ | fzf | cut -d: -f1,2 | sed 's/:/ +/')
 # }
 
 function fib() {

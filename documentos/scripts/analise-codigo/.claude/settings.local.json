@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk -F: '{s+=$2} END{print s}')",
+      "Bash(python3 verificar_vm_indefinidos_no_html.py /home/cremona/trabalho/caixa/sistemas/sinaf/des/naf-web/web/src/main/angular)",
+      "Bash(grep -n 'vm\\\\.\\\\|$controller\\(' app/parametros/controllers/ParametroProcessoDocumentoController.js)",
+      "Bash(python3 *)",
+      "Bash(grep -B5 'linha    15  vm.temAnexos' __TRACKED_VAR__/after_vars.txt)",
+      "Bash(awk 'NR==10164' lib/angular/js-xlsx/xlsx.js)",
+      "Bash(tmux new-session *)",
+      "Bash(tmux send-keys *)",
+      "Bash(tmux list-windows *)",
+      "Bash(tmux kill-session *)",
+      "Bash(tmux source-file *)",
+      "Bash(tmux set-option *)",
+      "Bash(tmux capture-pane *)",
+      "Bash(tmux list-keys *)",
+      "Bash(tmux unbind-key *)",
+      "Bash(tmux list-sessions *)"
+    ]
+  }
+}

@@ -49,6 +49,9 @@ curl -s "https://get.sdkman.io" | bash
 echo "************ QUARKUS ***********"
 sdk install quarkus
 
+echo "************ SPRING ***********"
+sdk install springboot
+
 echo "************ JAVA 11.0.2 ***********"
 sdk install java 11.0.2-open
 echo "************ JAVA 17 ***********"

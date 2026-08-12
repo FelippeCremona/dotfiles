@@ -62,7 +62,7 @@ eval "$(starship init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # zoxide
-export PATH=/home/cremona/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 eval "$(zoxide init bash --cmd cd)"
 
 export PATH="/opt/apache-maven-3.6.3/bin:$PATH"

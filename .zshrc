@@ -45,7 +45,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # zoxide
-export PATH=/home/f759705/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 eval "$(zoxide init zsh --cmd cd)"
 
 export PATH="/opt/apache-maven-3.6.3/bin:$PATH"
