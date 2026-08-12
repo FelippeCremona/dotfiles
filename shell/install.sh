@@ -41,6 +41,9 @@ sudo apt-get install -y tmuxinator
 echo "************ ZOXIDE ***********"
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 
+echo "************ BAT ***********"
+sudo apt install bat
+
 echo "************ SDKMAN ***********"
 curl -s "https://get.sdkman.io" | bash
 . ~/.sdkman/bin/sdkman-init.sh
