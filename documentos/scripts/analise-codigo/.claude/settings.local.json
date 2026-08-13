@@ -25,7 +25,8 @@
       "Bash(lua -e \"loadfile\\('/home/cremona/.config/nvim/lua/cremona/angularjs_goto.lua'\\)\")",
       "Bash(nvim --version)",
       "Bash(nvim *)",
-      "Bash(awk *)"
+      "Bash(awk *)",
+      "Bash(tmux show-options *)"
     ]
   }
 }
