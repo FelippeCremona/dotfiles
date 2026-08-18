@@ -476,17 +476,21 @@ def main():
         dismissed = sum(1 for u in usages if u['status'] == 'different')
         usages = [u for u in usages if u['status'] != 'different']
         print_usage_report(item, usages, dismissed)
-        # sem essa pausa, o fzf (tanto o do proximo pick_item quanto o de
-        # pick_and_open_in_editor logo abaixo) assume a tela cheia na
-        # sequencia e o relatorio que acabou de ser impresso some antes de
-        # dar tempo de ler.
-        if sys.stdin.isatty():
+        if usages:
+            # ha resultado -> segue direto pro fzf de pick_and_open_in_editor,
+            # que ja mostra os mesmos itens (com preview) sem precisar de
+            # tecla extra.
+            pick_and_open_in_editor(usages, lambda u: u['note'])
+        elif sys.stdin.isatty():
+            # sem nenhum resultado, nao ha fzf nenhum a seguir -- sem essa
+            # pausa, o fzf do PROXIMO pick_item (mais abaixo, no topo do
+            # loop) assume a tela cheia em seguida e a mensagem que acabou
+            # de ser impressa some antes de dar tempo de ler.
             try:
                 input("\nPressione Enter para continuar...")
             except (EOFError, KeyboardInterrupt):
                 print("\nAte mais.")
                 return
-        pick_and_open_in_editor(usages, lambda u: u['note'])
 
 
 if __name__ == '__main__':
