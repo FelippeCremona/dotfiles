@@ -215,25 +215,34 @@ def find_controller_usages(item, controllers, all_js, all_html, view_controllers
         for pos in find_bare_call_usages(own_content, func):
             line = own_content.count('\n', 0, pos) + 1
             usages.append({
-                'file': own_path, 'line': line,
+                'file': own_path, 'line': line, 'confirmed': True,
                 'note': 'reuso interno (chamada direta no mesmo arquivo)',
             })
 
+    # 'vm' e sempre o controllerAs deste projeto, entao 'vm.key(' por si so
+    # nao prova nada -- so conta como uso CONFIRMADO deste controller
+    # quando o arquivo/HTML esta dentro do escopo dele (proprio .js +
+    # descendentes via $controller()+angular.extend + HTMLs mapeados via
+    # rota/modal para esse escopo). Fora disso e so uma coincidencia de
+    # nome com outro controller, ate prova em contrario.
     pattern = re.compile(r'\bvm\.' + re.escape(key) + r'\s*\(')
     for path, content in all_js:
         for line in matches_with_lines(content, pattern):
-            note = f"vm.{key}()"
-            if path not in scope_files:
-                note += warn(' [fora do escopo deste controller -- confira se e o mesmo metodo]')
-            usages.append({'file': path, 'line': line, 'note': note})
+            in_scope = path in scope_files
+            usages.append({
+                'file': path, 'line': line, 'confirmed': in_scope,
+                'note': f"vm.{key}()" if in_scope else "vm." + key + "()  [mesmo nome, mas fora do escopo deste controller -- confira se e o mesmo metodo]",
+            })
     for path, content in all_html:
         for line in matches_with_lines(content, pattern):
-            note = f"vm.{key}() no HTML"
-            if path not in scope_html:
-                note += warn(' [view nao mapeada a este controller -- confira se e o mesmo metodo]')
-            usages.append({'file': path, 'line': line, 'note': note})
+            in_scope = path in scope_html
+            usages.append({
+                'file': path, 'line': line, 'confirmed': in_scope,
+                'note': f"vm.{key}() no HTML" if in_scope
+                        else "vm." + key + "() no HTML  [mesmo nome, view nao mapeada a este controller -- confira se e o mesmo metodo]",
+            })
 
-    usages.sort(key=lambda u: (u['file'], u['line']))
+    usages.sort(key=lambda u: (not u['confirmed'], u['file'], u['line']))
     return usages
 
 
@@ -252,10 +261,14 @@ def find_service_usages(item, all_js, all_html):
     for pos in find_bare_call_usages(own_content, func):
         line = own_content.count('\n', 0, pos) + 1
         usages.append({
-            'file': own_path, 'line': line,
+            'file': own_path, 'line': line, 'confirmed': True,
             'note': 'reuso interno (chamada direta no mesmo arquivo)',
         })
 
+    # 'alias.key(' so conta como uso CONFIRMADO deste service quando o
+    # alias foi resolvido casando '$inject' com os parametros da funcao
+    # do arquivo -- ou seja, o arquivo realmente injeta ESTE service (nao
+    # so tem uma variavel de mesmo nome por acaso).
     for path, content in all_js:
         if path == own_path:
             continue
@@ -264,27 +277,47 @@ def find_service_usages(item, all_js, all_html):
             continue
         pattern = re.compile(r'\b' + re.escape(alias) + r'\.' + re.escape(key) + r'\s*\(')
         for line in matches_with_lines(content, pattern):
-            usages.append({'file': path, 'line': line, 'note': f"{alias}.{key}()  (injeta '{name}')"})
+            usages.append({
+                'file': path, 'line': line, 'confirmed': True,
+                'note': f"{alias}.{key}()  (injeta '{name}')",
+            })
 
     if not usages:
+        # rede de seguranca: alias nao resolveu em lugar nenhum -- busca
+        # ampla por '.key(' em QUALQUER objeto, SEM verificar identidade
+        # nenhuma (pura coincidencia de nome ate prova em contrario).
         loose_pattern = re.compile(r'\.\s*' + re.escape(key) + r'\s*\(')
         for path, content in all_js:
             if path == own_path:
                 continue
             for line in matches_with_lines(content, loose_pattern):
                 usages.append({
-                    'file': path, 'line': line,
-                    'note': warn("possivel uso (correspondencia generica '.metodo()', apelido nao resolvido -- confira manualmente)"),
+                    'file': path, 'line': line, 'confirmed': False,
+                    'note': "correspondencia generica '." + key + "()' -- alias nao resolvido, confira manualmente se e o mesmo metodo",
                 })
         for path, content in all_html:
             for line in matches_with_lines(content, loose_pattern):
                 usages.append({
-                    'file': path, 'line': line,
-                    'note': warn("possivel uso em HTML (correspondencia generica '.metodo()' -- confira manualmente)"),
+                    'file': path, 'line': line, 'confirmed': False,
+                    'note': "correspondencia generica '." + key + "()' no HTML -- confira manualmente se e o mesmo metodo",
                 })
 
-    usages.sort(key=lambda u: (u['file'], u['line']))
+    usages.sort(key=lambda u: (not u['confirmed'], u['file'], u['line']))
     return usages
+
+
+def print_usage_group(title, group):
+    if not group:
+        return
+    print(f"{title} ({len(group)}):\n")
+    by_file = {}
+    for u in group:
+        by_file.setdefault(u['file'], []).append(u)
+    for f in sorted(by_file):
+        print(f"- {f}")
+        for u in sorted(by_file[f], key=lambda u: u['line']):
+            print(f"    linha {u['line']:>5}  {u['note']}")
+        print()
 
 
 def print_usage_report(item, usages):
@@ -295,15 +328,14 @@ def print_usage_report(item, usages):
         print("(Pode ser um metodo realmente orfao -- ou usado de um jeito que este "
               "script nao reconhece: bind(), apply/call dinamico, etc.)")
     else:
-        print(f"{len(usages)} lugar(es) onde {label} parece ser usado:\n")
-        by_file = {}
-        for u in usages:
-            by_file.setdefault(u['file'], []).append(u)
-        for f in sorted(by_file):
-            print(f"- {f}")
-            for u in sorted(by_file[f], key=lambda u: u['line']):
-                print(f"    linha {u['line']:>5}  {u['note']}")
-            print()
+        confirmed = [u for u in usages if u['confirmed']]
+        uncertain = [u for u in usages if not u['confirmed']]
+        print(f"{len(usages)} lugar(es) encontrado(s) para {label}:\n")
+        print_usage_group(warn("USOS CONFIRMADOS (identidade verificada -- e este metodo mesmo)"), confirmed)
+        print_usage_group(
+            warn("MESMO NOME, MAS NAO CONFIRMADO (fora do escopo do controller / alias nao "
+                 "resolvido -- pode ser um metodo diferente com o mesmo nome; confira manualmente)"),
+            uncertain)
     print("=" * 78)
 
 
