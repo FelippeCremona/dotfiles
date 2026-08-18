@@ -106,10 +106,21 @@ def collect_controllers(js_files):
 
 
 def method_used_internally(content, func_name):
+    """True se 'func_name(' aparece no proprio arquivo fora da propria
+    declaracao ('function func_name(') E fora de um acesso de membro em
+    outro objeto ('obj.func_name(') -- esse ultimo caso NAO e uma chamada
+    a funcao local: e uma chamada a um metodo de mesmo nome em outro
+    objeto (ex.: um service com metodo homonimo), e o '\\b' do regex sozinho
+    nao distingue os dois (um '.' antes do nome ja satisfaz '\\b')."""
     if not func_name:
         return False
-    occurrences = len(re.findall(r'\b' + re.escape(func_name) + r'\s*\(', content))
-    return occurrences > 1
+    pattern = re.compile(r'\b' + re.escape(func_name) + r'\s*\(')
+    for m in pattern.finditer(content):
+        prefix = content[:m.start()].rstrip()
+        if prefix.endswith('function') or prefix.endswith('.'):
+            continue
+        return True
+    return False
 
 
 def find_keys_matching_anywhere(contents, keys, template):

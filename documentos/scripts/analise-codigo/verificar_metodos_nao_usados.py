@@ -144,8 +144,19 @@ def collect_services(files):
 
 
 def method_used_internally(content, func_name):
-    occurrences = len(re.findall(r'\b' + re.escape(func_name) + r'\s*\(', content))
-    return occurrences > 1
+    """True se 'func_name(' aparece no proprio arquivo fora da propria
+    declaracao ('function func_name(') E fora de um acesso de membro em
+    outro objeto ('obj.func_name(') -- esse ultimo caso NAO e uma chamada
+    a funcao local: e uma chamada a um metodo de mesmo nome em outro
+    objeto, e o '\\b' do regex sozinho nao distingue os dois (um '.' antes
+    do nome ja satisfaz '\\b')."""
+    pattern = re.compile(r'\b' + re.escape(func_name) + r'\s*\(')
+    for m in pattern.finditer(content):
+        prefix = content[:m.start()].rstrip()
+        if prefix.endswith('function') or prefix.endswith('.'):
+            continue
+        return True
+    return False
 
 
 def find_unused_methods(services, files):
