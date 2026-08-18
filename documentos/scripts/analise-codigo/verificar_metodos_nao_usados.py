@@ -104,7 +104,7 @@ def find_public_api(content):
     last = matches[-1]
     open_pos = last.end() - 1
     inner_text, _ = extract_balanced_braces(content, open_pos)
-    return re.findall(r'(\w+)\s*:\s*(\w+)\s*(?=[,}])', inner_text)
+    return re.findall(r'(\w+)\s*:\s*(\w+)\s*(?=[,}]|$)', inner_text)
 
 
 def build_alias_map(content):
